@@ -11,17 +11,17 @@ double total, simple;
 double prob[4];
 
 bool visited[30][30];
-double dfs(int y, int x, int cnt) {
-    if (cnt == n) return 1;
+double dfs(int y, int x, int cnt){
+    if(cnt == n) return 1;
 
     double ret = 0;
-    for (int i = 0; i < 4; ++i) {
+    for(int i = 0; i < 4; ++i){
         int ny = y + dy[i], nx = x + dx[i];
-        if (visited[ny][nx]) continue;
+        if(visited[ny][nx]) continue;
         visited[ny][nx] = true;
-        //단순 경로에 대한 확률 계산산
+        //단순 경로에 대한 확률 계산
         ret += prob[i] * dfs(ny, nx, cnt + 1);
-        visited[ny][nx] = false;    //백트레킹킹
+        visited[ny][nx] = false;    //백트레킹
     }
     return ret;
 }
@@ -30,7 +30,7 @@ int main(){
     FastIO;
     cin >> n;
     cin >> east >> west >> south >> north;
-    //각 방향에 대한 확률 계산산
+    //각 방향에 대한 확률 계산
     prob[0] = east / 100.0;
     prob[1] = west / 100.0;
     prob[2] = south / 100.0;
