@@ -4,6 +4,8 @@
 using namespace std;
 
 const int INF = INT_MAX;
+const int dy[] = {1, -1, 0, 0};
+const int dx[] = {0, 0, 1, -1};
 
 int n, M = 0;
 int num[502][502];
@@ -19,17 +21,11 @@ int dp(int x, int y){
     
     ret = -INF;
 
-    if(num[x + 1][y] > num[x][y]){
-        ret = max(ret, dp(x + 1, y) + 1);
-    }
-    if(num[x][y + 1] > num[x][y]){
-        ret = max(ret, dp(x, y + 1) + 1);
-    }
-    if(num[x - 1][y] > num[x][y]){
-        ret = max(ret, dp(x - 1, y) + 1);
-    }
-    if(num[x][y - 1] > num[x][y]){
-        ret = max(ret, dp(x, y - 1) + 1);
+    for(int i = 0; i < 4; ++i){
+        int nx = x + dx[i], ny = y + dy[i];
+        if(num[nx][ny] > num[x][y]){
+            ret = max(ret, dp(nx, ny) + 1);
+        }
     }
 
     return ret;
